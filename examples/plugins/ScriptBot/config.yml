@@ -2,7 +2,7 @@
 # For info on bot, please go to https://github.com/DV8FromTheWorld/JDA/
 # For example on script, please go to https://github.com/VRCube/ScriptBot
 # Bot info
-bot-token: 'Insert token here'
+bot-token: 'nope'
 bot-playing: 'Minecraft'
 # This is import for command script
 # DO NOT REMOVE JAVA.LANG.* OR ELSE NOTHING WILL WORK!
@@ -67,7 +67,14 @@ script-imports:
 commands:
   '!ping':
     type: MSG
-    message: 'hello'
+    message: 'pong!'
+  '!players':
+    type: SCRIPT
+    script: 'players.java'
+    delete: true
+  '!eval':
+    type: SCRIPT
+    script: 'eval.java'
 
 # Bukkit Events
 # To get bot instance, use ScriptBot.getBot()
@@ -78,7 +85,7 @@ commands:
 #   System.println("A player joined: "+event.getPlayer().getName());
 #}
 # put script in plugins/ScriptBot/scripts
-event-script: 'none'
+event-script: 'eventhandler.java'
 
 # JDA Events
 # To get bot instance, use event.getJDA()
@@ -91,4 +98,4 @@ event-script: 'none'
 #   Bukkit.broadcastMessage("Message received! "+event.getMessage().getRawContent());
 # }
 
-jda-event-script: 'none'
+jda-event-script: 'jdahandler.java'

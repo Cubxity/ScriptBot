@@ -1,18 +1,8 @@
 package me.vrcube.scriptbot;
 
-import net.dv8tion.jda.core.events.Event;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
-import org.bukkit.event.*;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.plugin.RegisteredListener;
-import org.codehaus.groovy.jsr223.GroovyScriptEngineImpl;
-
-import javax.script.Bindings;
-import javax.script.ScriptEngine;
-import javax.script.ScriptException;
-import java.io.IOException;
-import java.util.List;
+import org.bukkit.event.Listener;
 
 public class EventManager extends ListenerAdapter implements Listener{
 
