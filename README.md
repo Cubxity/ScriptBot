@@ -1,5 +1,7 @@
 [license]: https://img.shields.io/badge/License-Apache%202.0-lightgrey.svg
+[download]: https://img.shields.io/badge/download-Spigot-orange.svg
 [ ![license][] ](https://github.com/VRCube/ScriptBot/tree/master/LICENSE)
+[ ![download][] ](https://github.com/VRCube/ScriptBot/)
 # ScriptBot
 A Discord bridge bot for spigot and discord, 100% Customizable, Custom script for JDA Events and Bukkit
 ## Configuration
