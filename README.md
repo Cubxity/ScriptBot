@@ -7,7 +7,7 @@
 
 # ScriptBot
 A Discord bridge bot for spigot and discord, 100% Customizable, Custom script for JDA Events and Bukkit
- **Note:** Java 8 is **REQUIRED** for this plugin to work properly
+##Note:## Java 8 is **REQUIRED** for this plugin to work properly
 ## Configuration
 ```yaml
 # ScriptBot by VRCube
