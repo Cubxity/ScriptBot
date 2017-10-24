@@ -100,4 +100,4 @@ event-script: 'none'
 jda-event-script: 'none'
 ```
 ## Examples
-Examples can be found [here](https://github.com/VRCube/ScriptBot/tree/master/example)
+Examples can be found [here](https://github.com/VRCube/ScriptBot/tree/master/examples)
