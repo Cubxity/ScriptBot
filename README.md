@@ -104,8 +104,8 @@ event-script: 'none'
 jda-event-script: 'none'
 ```
 ## Scripts
-Bot is using JDA librarlies, so if you are making command script, please visit JDA's github [here](https://github.com/DV8FromTheWorld/JDA)
-Instructions for using script is in config.yml.
+Bot is using JDA libraries, so if you are making command script, please visit JDA's GitHub [here](https://github.com/DV8FromTheWorld/JDA)
+Instructions for using the script is in config.yml.
 
 Command Script Example:
 ```java
