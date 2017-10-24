@@ -6,8 +6,8 @@
 [ ![Discord](https://discordapp.com/api/guilds/316647825553358848/widget.png) ][discord-invite]
 
 # ScriptBot
-A Discord bridge bot for spigot and discord, 100% Customizable, Custom script for JDA Events and Bukkit
-##Note:## Java 8 is **REQUIRED** for this plugin to work properly
+A Discord bridge bot for spigot and discord, 100% Customizable, Custom script for JDA Events and Bukkit.
+Java 8 is **REQUIRED** for this plugin to work properly.
 ## Configuration
 ```yaml
 # ScriptBot by VRCube
