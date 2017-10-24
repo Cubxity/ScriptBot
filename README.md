@@ -7,6 +7,7 @@
 
 # ScriptBot
 A Discord bridge bot for spigot and discord, 100% Customizable, Custom script for JDA Events and Bukkit
+**Note:** Java 8 is **REQUIRED** for this plugin to work properly
 ## Configuration
 ```yaml
 # ScriptBot by VRCube
@@ -102,5 +103,30 @@ event-script: 'none'
 
 jda-event-script: 'none'
 ```
-## Examples
+## Scripts
+Bot is using JDA librarlies, so if you are making command script, please visit JDA's github [here](https://github.com/DV8FromTheWorld/JDA)
+Instructions for using script is in config.yml.
+
+Command Script Example:
+```java
+channel.sendMessage("Hi! This is a command).queue()
+```
+
+Bukkit Event Script Example [DOCS](https://hub.spigotmc.org/javadocs/bukkit/)
+```java
+@EventHandler
+public void onDeath(PlayerDeathEvent e){
+  bot.getTextChannelById("YOU CHANNEL ID").sendMessage(e.getEntity().getName()+" just died").queue();
+}
+```
+
+JDA Event Script Example [DOCS](https://github.com/DV8FromTheWorld/JDA)
+```java
+@Override
+public void onMessageReceived(MessageReceivedEvent e){
+  Bukkit.broadcastMessage(e.getAuthor().getName()+" > "+e.getMessage().getRawContent());
+}
+```
+
+## More Examples
 Examples can be found [here](https://github.com/VRCube/ScriptBot/tree/master/examples)
