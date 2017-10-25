@@ -1,7 +1,7 @@
 [download]: https://img.shields.io/badge/download-Spigot-orange.svg
 [license]: https://img.shields.io/badge/License-Apache%202.0-lightgrey.svg
 [discord-invite]: https://discord.gg/AdmWkEs
-[ ![download][] ](https://github.com/VRCube/ScriptBot/)
+[ ![download][] ](https://www.spigotmc.org/resources/scriptbot.48768/)
 [ ![license][] ](https://github.com/VRCube/ScriptBot/tree/master/LICENSE)
 [ ![Discord](https://discordapp.com/api/guilds/316647825553358848/widget.png) ][discord-invite]
 <img align="right" src="https://github.com/VRCube/ScriptBot/raw/master/scriptbot-logo.png" height="200" width="200">
