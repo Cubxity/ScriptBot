@@ -1,5 +1,5 @@
 [download]: https://img.shields.io/badge/download-Spigot-orange.svg
-[license]: https://img.shields.io/badge/License-Apache%202.0-lightgrey.svg
+[license]: https://img.shields.io/badge/license-GNU%20General%20public%20license%20v3-lightgrey.svg
 [discord-invite]: https://discord.gg/zNmpa8K
 [ ![download][] ](https://www.spigotmc.org/resources/scriptbot.48768/)
 [ ![license][] ](https://github.com/VRCube/ScriptBot/tree/master/LICENSE)
