@@ -109,7 +109,7 @@ Instructions for using the script is in config.yml.
 
 Command Script Example:
 ```java
-channel.sendMessage("Hi! This is a command).queue()
+channel.sendMessage("Hi! This is a command").queue()
 ```
 
 Bukkit Event Script Example [DOCS](https://hub.spigotmc.org/javadocs/bukkit/)
