@@ -1,9 +1,13 @@
-[license]: https://img.shields.io/badge/License-Apache%202.0-lightgrey.svg
 [download]: https://img.shields.io/badge/download-Spigot-orange.svg
+[license]: https://img.shields.io/badge/license-GNU%20General%20public%20license%20v3-lightgrey.svg
+[discord-invite]: https://discord.gg/zNmpa8K
+[ ![download][] ](https://www.spigotmc.org/resources/scriptbot.48768/)
 [ ![license][] ](https://github.com/VRCube/ScriptBot/tree/master/LICENSE)
-[ ![download][] ](https://github.com/VRCube/ScriptBot/)
+[ ![Discord](https://discordapp.com/api/guilds/372605909685501963/widget.png) ][discord-invite]
+<img align="right" src="https://github.com/VRCube/ScriptBot/raw/master/scriptbot-logo.png" height="200" width="200">
 # ScriptBot
-A Discord bridge bot for spigot and discord, 100% Customizable, Custom script for JDA Events and Bukkit
+A Discord bridge bot for spigot and discord, 100% Customizable, Custom script for JDA Events and Bukkit.
+Java 8+ is **REQUIRED** for this plugin to work properly.
 ## Configuration
 ```yaml
 # ScriptBot by VRCube
@@ -99,5 +103,30 @@ event-script: 'none'
 
 jda-event-script: 'none'
 ```
-## Examples
-Examples can be found [here](https://github.com/VRCube/ScriptBot/tree/master/example)
+## Scripts
+Bot is using JDA libraries, so if you are making command script, please visit JDA's GitHub [here](https://github.com/DV8FromTheWorld/JDA)
+Instructions for using the script is in config.yml.
+
+Command Script Example:
+```java
+channel.sendMessage("Hi! This is a command").queue()
+```
+
+Bukkit Event Script Example [DOCS](https://hub.spigotmc.org/javadocs/bukkit/)
+```java
+@EventHandler
+public void onDeath(PlayerDeathEvent e){
+  bot.getTextChannelById("YOU CHANNEL ID").sendMessage(e.getEntity().getName()+" just died").queue();
+}
+```
+
+JDA Event Script Example [DOCS](https://github.com/DV8FromTheWorld/JDA)
+```java
+@Override
+public void onMessageReceived(MessageReceivedEvent e){
+  Bukkit.broadcastMessage(e.getAuthor().getName()+" > "+e.getMessage().getRawContent());
+}
+```
+
+## More Examples
+Examples can be found [here](https://github.com/VRCube/ScriptBot/tree/master/examples)
