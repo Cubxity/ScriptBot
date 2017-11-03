@@ -1,5 +1,7 @@
-package me.vrcube.scriptbot;
+package me.vrcube.scriptbot.script;
 
+import me.vrcube.scriptbot.ScriptBot;
+import me.vrcube.scriptbot.script.Command;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import org.bukkit.event.Listener;

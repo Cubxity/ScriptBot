@@ -1,5 +1,7 @@
-package me.vrcube.scriptbot;
+package me.vrcube.scriptbot.script;
 
+import me.vrcube.scriptbot.utils.Config;
+import me.vrcube.scriptbot.ScriptBot;
 import org.codehaus.groovy.jsr223.GroovyScriptEngineImpl;
 
 import javax.script.Bindings;
@@ -22,7 +24,7 @@ public class ScriptManager {
         }
         loadBukkitEventHandler();
         loadJDAEventHandler();
-        ScriptBot.log("&aFinished Loading!");
+
     }
 
 

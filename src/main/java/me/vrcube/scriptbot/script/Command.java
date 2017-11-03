@@ -1,5 +1,7 @@
-package me.vrcube.scriptbot;
+package me.vrcube.scriptbot.script;
 
+import me.vrcube.scriptbot.utils.Config;
+import me.vrcube.scriptbot.ScriptBot;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import org.codehaus.groovy.jsr223.GroovyScriptEngineImpl;
 

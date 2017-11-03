@@ -1,5 +1,10 @@
 package me.vrcube.scriptbot;
 
+import me.vrcube.scriptbot.script.EventManager;
+import me.vrcube.scriptbot.script.ScriptManager;
+import me.vrcube.scriptbot.utils.Config;
+import me.vrcube.scriptbot.utils.Metrics;
+import me.vrcube.scriptbot.utils.Updater;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
@@ -10,12 +15,15 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public final class ScriptBot extends JavaPlugin {
     private static ScriptBot instance;
 
     public static ScriptBot getInstance() {
         return instance;
+
     }
 
     private static JDA bot;
@@ -30,12 +38,42 @@ public final class ScriptBot extends JavaPlugin {
         return scriptManager;
     }
 
-    public static double version = 1.0;
+    public static double version = 1.1;
+
+    private static Metrics metrics;
+    private void initConfig(){
+        if(!new File(getDataFolder(), "config.yml").exists()) {
+            this.getConfig().options().copyDefaults();
+            saveResource("config.yml", false);
+
+
+        }else{
+            Config.addComments();
+        }
+        Config.migrateConfig();
+    }
     @Override
     public void onEnable() {
-        this.getConfig().options().copyDefaults();
-        saveDefaultConfig();
         instance = this;
+        initConfig();
+        startup();
+    }
+
+    @Override
+    public void onDisable() {
+        if(bot != null)
+            bot.shutdownNow();
+        ScriptBot.log("Shutting down...");
+
+    }
+
+
+    public static void log(String l){
+        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&f[&7S&8B&f] "+l));
+
+    }
+
+    private void startup(){
         System.out.println("\n  ____            _       _   ____        _   \n" +
                 " / ___|  ___ _ __(_)_ __ | |_| __ )  ___ | |_ \n" +
                 " \\___ \\ / __| '__| | '_ \\| __|  _ \\ / _ \\| __|\n" +
@@ -58,17 +96,12 @@ public final class ScriptBot extends JavaPlugin {
         new File(ScriptBot.getInstance().getDataFolder(), "scripts").mkdirs();
         scriptManager.load();
         Bukkit.getPluginManager().registerEvents(new EventManager(), this);
-    }
-
-    @Override
-    public void onDisable() {
-        if(bot != null)
-            bot.shutdownNow();
-    }
-
-    public static void log(String l){
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&f[&7S&8B&f] "+l));
-
+        if(Config.isMetricsEnabled()){
+            metrics = new Metrics(this);
+            log("metrics loaded.");
+        }
+        log("&aFinished Loading!");
+        Updater.check();
     }
 
 
