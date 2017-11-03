@@ -45,10 +45,8 @@ public final class ScriptBot extends JavaPlugin {
         if(!new File(getDataFolder(), "config.yml").exists()) {
             this.getConfig().options().copyDefaults();
             saveResource("config.yml", false);
-
-
-        }else{
             Config.addComments();
+
         }
         Config.migrateConfig();
     }
