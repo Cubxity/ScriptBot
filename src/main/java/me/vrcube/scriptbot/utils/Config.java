@@ -31,7 +31,7 @@ public class Config {
     public static FileConfiguration getConfig(){
         return ScriptBot.getInstance().getConfig();
     }
-
+    private static String config;
     public static void migrateConfig(){
         YamlConfiguration config = YamlConfiguration.loadConfiguration(new File(ScriptBot.getInstance().getDataFolder(), "config.yml"));
         double configver = (config.get("config-ver") != null ? config.getDouble("config-ver") : 1.0);
@@ -90,7 +90,7 @@ public class Config {
         }
     }
     public static void addComments(){
-
+        config = readConfig();
         addComments("config-ver", "" +
                 "# ScriptBot by VRCube\n" +
                 "# For info on bot, please go to https://github.com/DV8FromTheWorld/JDA/\n" +
@@ -139,10 +139,13 @@ public class Config {
                 "# public void onMessageReceived(MessageReceivedEvent event){\n" +
                 "#   Bukkit.broadcastMessage(\"Message received! \"+event.getMessage().getRawContent());\n" +
                 "# }");
+        writeComments();
     }
-    public static void addComments(String at, String comment){
-        String config = readConfig();
-        config = config.replaceAll(at, comment+"\n"+at);
+    private static void addComments(String at, String comment){
+        config = config.replace(at, comment+"\n"+at);
+    }
+
+    private static void writeComments(){
         writeConfig(config);
     }
 
