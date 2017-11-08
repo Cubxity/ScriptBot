@@ -15,12 +15,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public final class ScriptBot extends JavaPlugin {
     private static ScriptBot instance;
-
+    private static File jar;
     public static ScriptBot getInstance() {
         return instance;
 
@@ -53,6 +51,7 @@ public final class ScriptBot extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+        jar = getFile();
         initConfig();
         startup();
     }
@@ -101,6 +100,8 @@ public final class ScriptBot extends JavaPlugin {
         log("&aFinished Loading!");
         Updater.check();
     }
-
+    public static File getJar(){
+        return jar;
+    }
 
 }

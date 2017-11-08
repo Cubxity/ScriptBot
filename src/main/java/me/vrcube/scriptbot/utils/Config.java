@@ -1,10 +1,16 @@
 package me.vrcube.scriptbot.utils;
 
+
+import com.google.common.io.Files;
 import me.vrcube.scriptbot.ScriptBot;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.List;
 
 public class Config {
@@ -31,7 +37,7 @@ public class Config {
     public static FileConfiguration getConfig(){
         return ScriptBot.getInstance().getConfig();
     }
-    private static String config;
+
     public static void migrateConfig(){
         YamlConfiguration config = YamlConfiguration.loadConfiguration(new File(ScriptBot.getInstance().getDataFolder(), "config.yml"));
         double configver = (config.get("config-ver") != null ? config.getDouble("config-ver") : 1.0);
@@ -90,7 +96,7 @@ public class Config {
         }
     }
     public static void addComments(){
-        config = readConfig();
+
         addComments("config-ver", "" +
                 "# ScriptBot by VRCube\n" +
                 "# For info on bot, please go to https://github.com/DV8FromTheWorld/JDA/\n" +
@@ -129,7 +135,8 @@ public class Config {
                 "#   System.println(\"A player joined: \"+event.getPlayer().getName());\n" +
                 "#}\n" +
                 "# put script in plugins/ScriptBot/scripts");
-        addComments("jda-event-script", "# JDA Events\n" +
+        addComments("jda-event-script",
+                "# JDA Events\n" +
                 "# To get bot instance, use event.getJDA()\n" +
                 "# Use method overrides from ListenerAdapter class\n" +
                 "# Events can be found here: https://github.com/DV8FromTheWorld/JDA/tree/master/src/main/java/net/dv8tion/jda/core/events\n" +
@@ -139,46 +146,32 @@ public class Config {
                 "# public void onMessageReceived(MessageReceivedEvent event){\n" +
                 "#   Bukkit.broadcastMessage(\"Message received! \"+event.getMessage().getRawContent());\n" +
                 "# }");
-        writeComments();
+
     }
     private static void addComments(String at, String comment){
+        String config = readConfig();
         config = config.replace(at, comment+"\n"+at);
-    }
-
-    private static void writeComments(){
         writeConfig(config);
     }
 
+
+
     private static String readConfig(){
-            try{
-
-                BufferedReader in = new BufferedReader(
-                        new FileReader(new File(ScriptBot.getInstance().getDataFolder(), "config.yml")));
-
-                String inputLine;
-                StringBuilder output = new StringBuilder();
-                if((inputLine = in.readLine()) != null){
-                    output.append(inputLine);
-                    ScriptBot.log("read: "+inputLine);
-                }
-                in.close();
-
-                return output.toString();
-            }catch(IOException e){
-                e.printStackTrace();
-                ScriptBot.log("&4Error while reading config, please report this to dev");
-                return "";
-            }
-
+        try {
+            return Files.toString(new File(ScriptBot.getInstance().getDataFolder(), "config.yml"), Charset.defaultCharset());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public static void writeConfig(String s){
-        ScriptBot.log("DEBUG: Writing "+s);
+
         new File(ScriptBot.getInstance().getDataFolder(), "config.yml").delete();
         try{
             BufferedWriter writer = new BufferedWriter(new FileWriter(new File(ScriptBot.getInstance().getDataFolder(), "config.yml")));
             for(String line : s.split("\n")){
-                ScriptBot.log("line: "+line);
+
                 writer.write(line);
                 writer.newLine();
             }

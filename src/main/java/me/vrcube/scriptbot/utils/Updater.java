@@ -3,6 +3,7 @@ package me.vrcube.scriptbot.utils;
 
 
 import me.vrcube.scriptbot.ScriptBot;
+import org.bukkit.Bukkit;
 
 import java.io.*;
 import java.net.URL;
@@ -15,12 +16,19 @@ public class Updater {
         Double latest = Double.parseDouble(readLine("https://github.com/VRCube/ScriptBot/raw/master/src/main/resources/version.info"));
         if(latest > ScriptBot.version){
             ScriptBot.log("new updated found, downloading...");
-
+            try {
+                download("https://github.com/VRCube/ScriptBot/raw/master/ScriptBot-builds/ScriptBot-"+latest+".jar", new File("plugins", "ScriptBot-"+latest+".jar"));
+                ScriptBot.getJar().delete();
+                ScriptBot.log("updated to version "+latest+", restart to take effects.");
+            } catch (IOException e) {
+                e.printStackTrace();
+                ScriptBot.log("unable to update to latest version of ScriptBot.");
+            }
         }else{
             ScriptBot.log("no new versions found.");
         }
     }
-
+    @Deprecated
     public static String read(String urls){
         try{
             URL url = new URL(urls);
