@@ -3,3 +3,8 @@ version: ${project.version}
 main: me.vrcube.scriptbot.ScriptBot
 authors: [VRCube]
 description: Build custom bridge bot with ease!
+commands:
+  scriptbot:
+    aliases: [sbot, scriptb]
+    description: Main command
+    usage: /scriptbot

@@ -1,3 +1,21 @@
+/*
+ * ScriptBot, 100% Customizable discord bot bridge plugin.
+ *     Copyright (C) 2017  VRCube
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package me.vrcube.scriptbot.script;
 
 import me.vrcube.scriptbot.utils.Config;
@@ -14,10 +32,60 @@ import java.util.List;
 public class ScriptManager {
     private List<Command> commands = new ArrayList<>();
 
-    public List<Command> getCommands() {
+    List<Command> getCommands() {
         return commands;
     }
+    public void loadEnableScript(){
+        if(Config.getString("enable-script").equals("none"))
+            return;
+        if(!getScriptFile(Config.getString("enable-script")).exists()){
+            ScriptBot.log("&4Failed to execute enable script: File not found.");
+            return;
+        }
+        ScriptEngine engine = new GroovyScriptEngineImpl();
+        List<String> imports = Config.getImports();
+        StringBuilder script = new StringBuilder();
+        for(String imp : imports){
+            script.append("import ").append(imp).append(";\n");
+        }
+        try {
+            script.append(readFile(getScriptFile(Config.getString("enable-script"))));
+            engine.put("bot", ScriptBot.getBot());
+            engine.eval(script.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+            ScriptBot.log("&4Failed to execute enable script: Unable to read script");
+        } catch (ScriptException e) {
+            e.printStackTrace();
+            ScriptBot.log("&4Error while trying to execute enable script.");
+        }
+    }
 
+    public void loadDisableScript(){
+        if(Config.getString("disable-script").equals("none"))
+            return;
+        if(!getScriptFile(Config.getString("enable-script")).exists()){
+            ScriptBot.log("&4Failed to execute disable script: File not found.");
+            return;
+        }
+        ScriptEngine engine = new GroovyScriptEngineImpl();
+        List<String> imports = Config.getImports();
+        StringBuilder script = new StringBuilder();
+        for(String imp : imports){
+            script.append("import ").append(imp).append(";\n");
+        }
+        try {
+            script.append(readFile(getScriptFile(Config.getString("disable-script"))));
+            engine.put("bot", ScriptBot.getBot());
+            engine.eval(script.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+            ScriptBot.log("&4Failed to execute disable script: Unable to read script");
+        } catch (ScriptException e) {
+            e.printStackTrace();
+            ScriptBot.log("&4Error while trying to execute disable script.");
+        }
+    }
     public void load(){
         for(String s : Config.getConfig().getConfigurationSection("commands").getKeys(false)){
           loadCommand(s);
@@ -72,12 +140,12 @@ public class ScriptManager {
 
     }
 
-    public static File getScriptFile(String name){
+    private static File getScriptFile(String name){
         File f = new File(ScriptBot.getInstance().getDataFolder(), "scripts");
         return new File(f, name);
     }
 
-    public static String readFile(File f) throws IOException{
+    static String readFile(File f) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
         StringBuilder builder = new StringBuilder();
         String line;
@@ -89,7 +157,7 @@ public class ScriptManager {
     }
     private void loadBukkitEventHandler(){
         if(Config.getString("event-script").equals("none"))return;
-        if(!ScriptManager.getScriptFile(Config.getString("event-script")).exists()){
+        if(!getScriptFile(Config.getString("event-script")).exists()){
             ScriptBot.log("&4Unable to execute event handler script: Script not found in file system.");
         }else{
             ScriptEngine engine = new GroovyScriptEngineImpl();

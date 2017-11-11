@@ -1,8 +1,26 @@
-package me.vrcube.scriptbot.utils;
+/*
+ * ScriptBot, 100% Customizable discord bot bridge plugin.
+ *     Copyright (C) 2017  VRCube
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
+package me.vrcube.scriptbot.utils;
 
 import com.google.common.io.Files;
 import me.vrcube.scriptbot.ScriptBot;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -14,16 +32,17 @@ import java.nio.charset.Charset;
 import java.util.List;
 
 public class Config {
+    private static  String config;
     public static String getToken(){
-        return ScriptBot.getInstance().getConfig().getString("bot-token");
+        return getConfig().getString("bot-token");
     }
 
     public static String getGame(){
-        return ScriptBot.getInstance().getConfig().getString("bot-playing");
+        return getConfig().getString("bot-playing").replaceAll("%players%", String.valueOf(Bukkit.getOnlinePlayers().size()));
     }
 
     public static List<String> getImports(){
-        return ScriptBot.getInstance().getConfig().getStringList("script-imports");
+        return getConfig().getStringList("script-imports");
     }
 
     public static boolean isMetricsEnabled(){
@@ -31,7 +50,7 @@ public class Config {
     }
 
     public static String getString(String path){
-        return ScriptBot.getInstance().getConfig().getString(path);
+        return getConfig().getString(path);
     }
 
     public static FileConfiguration getConfig(){
@@ -96,13 +115,14 @@ public class Config {
         }
     }
     public static void addComments(){
-
+        config = readConfig();
         addComments("config-ver", "" +
                 "# ScriptBot by VRCube\n" +
                 "# For info on bot, please go to https://github.com/DV8FromTheWorld/JDA/\n" +
                 "# For example on script, please go to https://github.com/VRCube/ScriptBot\n" +
                 "# DO NOT EDIT THIS VALUE BELOW, OR ELSE PLUGIN MIGHT CORRUPT");
         addComments("bot-token", "# Bot Info");
+        addComments("bot-playing", "# Bot playing status, Placeholder %players% is player count");
         addComments("script-imports",
                 "# This is import for command script\n" +
                 "# DO NOT REMOVE JAVA.LANG.* OR ELSE NOTHING WILL WORK!");
@@ -146,12 +166,16 @@ public class Config {
                 "# public void onMessageReceived(MessageReceivedEvent event){\n" +
                 "#   Bukkit.broadcastMessage(\"Message received! \"+event.getMessage().getRawContent());\n" +
                 "# }");
-
+        addComments("enable-script",
+                "# Enable and Disable script, runs when plugin enable and disable\n"+
+                         "# available bindings: \n"+
+                         "# bot - bot instance");
+        addComments("discord-command",
+                "# Configuration for /discord command");
+        writeConfig(config);
     }
     private static void addComments(String at, String comment){
-        String config = readConfig();
-        config = config.replace(at, comment+"\n"+at);
-        writeConfig(config);
+        config = config.replaceFirst(at, comment+"\n"+at);
     }
 
 
@@ -171,9 +195,8 @@ public class Config {
         try{
             BufferedWriter writer = new BufferedWriter(new FileWriter(new File(ScriptBot.getInstance().getDataFolder(), "config.yml")));
             for(String line : s.split("\n")){
-
-                writer.write(line);
-                writer.newLine();
+                if(!line.equals("\n"))
+                    writer.write(line+"\n");
             }
             writer.close();
         }catch (IOException e){

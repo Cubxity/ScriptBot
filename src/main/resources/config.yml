@@ -1,8 +1,6 @@
-
 config-ver: 1.1
 bot-token: 'Insert token here'
 bot-playing: 'Minecraft'
-
 script-imports:
   - java.lang.*
   - java.utils.*
@@ -40,15 +38,20 @@ script-imports:
   - me.vrcube.scriptbot.*
   - org.codehaus.groovy.jsr223.*
   - javax.script.*
-
-
 commands:
   '!ping':
     type: MSG
     message: 'hello'
-
 event-script: 'none'
-
 jda-event-script: 'none'
-
 metrics-enabled: true
+
+enable-script: 'none'
+disable-script: 'none'
+discord-command:
+  messages:
+  - '&c-------------------------------------------------'
+  - '&eJoin our discord now: https://discord.gg/example'
+  - '&ePowered by ScriptBot'
+  - '&c-------------------------------------------------'
+  enabled: true
