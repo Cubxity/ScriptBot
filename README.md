@@ -102,6 +102,21 @@ event-script: 'none'
 # }
 
 jda-event-script: 'none'
+
+metrics-enabled: true
+
+# Enable and Disable script, runs when plugin enable and disable
+# available bindings: 
+# bot - bot instance
+enable-script: 'none'
+disable-script: 'none'
+discord-command:
+  messages:
+  - '&c-------------------------------------------------'
+  - '&eJoin our discord now: https://discord.gg/example'
+  - '&ePowered by ScriptBot'
+  - '&c-------------------------------------------------'
+  enabled: true
 ```
 ## Scripts
 Bot is using JDA libraries, so if you are making command script, please visit JDA's GitHub [here](https://github.com/DV8FromTheWorld/JDA)

@@ -99,3 +99,18 @@ event-script: 'eventhandler.java'
 # }
 
 jda-event-script: 'jdahandler.java'
+
+metrics-enabled: true
+
+# Enable and Disable script, runs when plugin enable and disable
+# available bindings:
+# bot - bot instance
+enable-script: 'enable.java'
+disable-script: 'disable.java'
+discord-command:
+  messages:
+  - '&c-------------------------------------------------'
+  - '&eJoin our discord now: https://discord.gg/example'
+  - '&ePowered by ScriptBot'
+  - '&c-------------------------------------------------'
+  enabled: true
