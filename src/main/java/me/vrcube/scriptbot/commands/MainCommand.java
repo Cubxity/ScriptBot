@@ -38,6 +38,7 @@ public class MainCommand implements CommandExecutor{
         }
         switch(args[0]){
             case "reload":
+                if(!sender.hasPermission("scriptbot.commands.reload"))return true;
                 sender.sendMessage(Color.of("&aReloading..."));
                 PluginUtil.reload(ScriptBot.getInstance());
                 sender.sendMessage(Color.of("&aReloaded!"));
