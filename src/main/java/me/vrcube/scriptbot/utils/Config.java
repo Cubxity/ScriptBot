@@ -60,7 +60,7 @@ public class Config {
     }
 
     public static String getString(String path){
-        return getConfig().getString(path);
+        return String.valueOf(getConfig().get(path));
     }
 
     public static FileConfiguration getConfig(){
@@ -94,7 +94,6 @@ public class Config {
                     else
                     if(original.isString(key)) {
                         current.set(key, original.getString(key));
-
                     }
                     else
                     if(original.isList(key)) {

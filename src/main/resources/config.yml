@@ -1,4 +1,4 @@
-config-ver: 1.1
+config-ver: 1.2
 bot-token: 'Insert token here'
 bot-playing: 'Minecraft'
 script-imports:

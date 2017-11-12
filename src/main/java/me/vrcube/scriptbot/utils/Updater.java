@@ -19,9 +19,6 @@
 package me.vrcube.scriptbot.utils;
 
 import me.vrcube.scriptbot.ScriptBot;
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.InvalidDescriptionException;
-import org.bukkit.plugin.InvalidPluginException;
 
 import java.io.*;
 import java.net.URL;
