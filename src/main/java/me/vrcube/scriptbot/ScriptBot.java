@@ -56,7 +56,7 @@ public final class ScriptBot extends JavaPlugin {
         return scriptManager;
     }
 
-    public static double version = 1.1;
+    public static double version = 1.2;
 
     private static Metrics metrics;
     private void initConfig(){
