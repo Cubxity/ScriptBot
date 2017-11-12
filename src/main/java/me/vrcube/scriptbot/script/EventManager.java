@@ -44,8 +44,8 @@ public class EventManager extends ListenerAdapter implements Listener{
     }
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onCommand(PlayerCommandPreprocessEvent e){
-        e.setCancelled(true);
         if(e.getMessage().startsWith("/discord") && Config.getConfig().getBoolean("discord-command.enabled")){
+            e.setCancelled(true);
             StringBuilder message = new StringBuilder();
             for(String line : Config.getConfig().getStringList("discord-command.messages")){
                 message.append(line).append("\n");

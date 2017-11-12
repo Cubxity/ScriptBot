@@ -50,7 +50,7 @@ public class Command {
 
     public void execute(MessageReceivedEvent e) throws Exception{
         if(type == CommandType.MSG){
-            e.getChannel().sendMessage(response).queue();
+            e.getChannel().sendMessage(Config.withPlaceholder(response)).queue();
         }else if (type == CommandType.SCRIPT){
             ScriptEngine engine = new GroovyScriptEngineImpl();
             List<String> imports = Config.getImports();
@@ -65,7 +65,7 @@ public class Command {
             binds.put("bot", ScriptBot.getBot());
             binds.put("author", e.getAuthor());
             binds.put("message", e.getMessage());
-            engine.eval(script.toString(), binds);
+            engine.eval(Config.withPlaceholder(script.toString()), binds);
         }
         if(delete)
             e.getMessage().delete().queue();

@@ -19,10 +19,12 @@
 package me.vrcube.scriptbot.utils;
 
 import com.google.common.io.Files;
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.vrcube.scriptbot.ScriptBot;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -32,13 +34,21 @@ import java.nio.charset.Charset;
 import java.util.List;
 
 public class Config {
+    public static String withPlaceholder(String s){
+        if(!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI"))return s;
+        return PlaceholderAPI.setPlaceholders(null, s);
+    }
+    public static String withPlaceholder(Player p, String s){
+        if(!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI"))return s;
+        return PlaceholderAPI.setPlaceholders(p, s);
+    }
     private static  String config;
     public static String getToken(){
         return getConfig().getString("bot-token");
     }
 
     public static String getGame(){
-        return getConfig().getString("bot-playing").replaceAll("%players%", String.valueOf(Bukkit.getOnlinePlayers().size()));
+        return withPlaceholder(getString("bot-playing").replaceAll("%players%", String.valueOf(Bukkit.getOnlinePlayers().size())));
     }
 
     public static List<String> getImports(){
