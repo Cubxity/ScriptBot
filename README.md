@@ -4,6 +4,7 @@
 [ ![download][] ](https://www.spigotmc.org/resources/scriptbot.48768/)
 [ ![license][] ](https://github.com/VRCube/ScriptBot/tree/master/LICENSE)
 [ ![Discord](https://discordapp.com/api/guilds/372605909685501963/widget.png) ][discord-invite]
+[![Discord Bots](https://discordbots.org/api/widget/status/364678314108911616.png)](https://discordbots.org/bot/364678314108911616
 <img align="right" src="https://github.com/VRCube/ScriptBot/raw/master/scriptbot-logo.png" height="200" width="200">
 # ScriptBot
 A Discord bridge bot for spigot and discord, 100% Customizable, Custom script for JDA Events and Bukkit.
